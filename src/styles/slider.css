@@ -1,0 +1,40 @@
+.item {
+  height: 100%;
+  min-width: 20rem;
+  padding: 4rem;
+}
+.item img {
+  height: 200px;
+  width: 100%;
+  pointer-events: none;
+}
+.slider {
+  display: flex;
+  position: relative;
+  transition: all 1s;
+  overflow: hidden;
+}
+.slider-container {
+  margin: 0 auto;
+  padding-right: 10px;
+  overflow: hidden;
+  position: static;
+  margin-top: 0px;
+}
+
+.leftArrow {
+  cursor: pointer;
+  z-index: 2;
+  background-color: rgba(203, 209, 209, 0.438);
+  border-radius: 100%;
+}
+.contenedorFlechas {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  top: -235px;
+  height: 40px;
+  overflow: hidden;
+  margin-bottom: -40px;
+}
