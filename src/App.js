@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Carrito from "./components/Carrito";
@@ -10,6 +10,7 @@ import Kids from "./components/Kids";
 import { useEffect, useState } from "react";
 import { allProducts } from "./functions/funciones";
 import Footer from "./components/Footer";
+import ProductoSinglePage from "./components/ProductoSinglePage";
 
 function App() {
   const [productos, setProductos] = useState("");
@@ -20,20 +21,21 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+        <Header />
       <Routes>
         <Route path="/" element={<Home productos={productos} />} />
         <Route path="/shop" element={<Carrito />} />
         <Route path="/men" element={<Hombres />} />
         <Route path="/women" element={<Mujeres />} />
         <Route path="/kids" element={<Kids />} />
+        <Route path="/:id" element={<ProductoSinglePage productos={productos} />} />
         <Route path="/sale" element={<Sale />} />
 
         {/* Falta hacer la pagina de ERROR */}
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
-    </div>
+      </div>
   );
 }
 

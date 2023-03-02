@@ -42,7 +42,7 @@ const Footer = () => {
 const Foot = styled.footer`
   background-color: black;
   width: 100%;
-  height: 70px;
+  height: 12vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

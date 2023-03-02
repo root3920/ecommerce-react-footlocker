@@ -8,3 +8,11 @@
 body{
     background-color: #e8e8e876;
 }
+
+.App{
+    height: 100vh;
+}
+
+.main-contenedor{
+    height: 88vh;
+}

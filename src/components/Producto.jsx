@@ -1,16 +1,19 @@
 import styled, { css } from "styled-components";
+import { NavLink } from "react-router-dom";
 
-const Producto = ({ imagen, categoria, titulo, precio }) => {
+const Producto = ({ imagen, categoria, titulo, precio, id }) => {
   return (
     <ContenedorItem>
-      <Contenedor>
-        <Image src={imagen} alt="" />
-      </Contenedor>
-      <Contenedor texto>
-        <Category>{categoria}</Category>
-        <Title>{titulo}</Title>
-        <Price>USD {precio}</Price>
-      </Contenedor>
+      <NavLink to={`/${id}`}>
+        <Contenedor>
+          <Image src={imagen} alt="" />
+        </Contenedor>
+        <Contenedor texto>
+          <Category>{categoria}</Category>
+          <Title>{titulo}</Title>
+          <Price>USD {precio}</Price>
+        </Contenedor>
+      </NavLink>
     </ContenedorItem>
   );
 };
@@ -21,8 +24,13 @@ const ContenedorItem = styled.div`
   margin: 0 30px;
   cursor: pointer;
 
-  &:hover{
-    Title{
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  &:hover {
+    Title {
       text-decoration: underline;
     }
   }
@@ -52,6 +60,17 @@ const Title = styled.p`
   &:hover {
     text-decoration: underline;
   }
+
+  ${props => props.singlePage && css`
+  font-size: 20px;
+  margin-top: 50px;
+  text-transform: none;
+
+  &:hover {
+    text-decoration: none;
+
+  }
+  `}
 `;
 
 const Price = styled.p`
@@ -72,10 +91,10 @@ const Contenedor = styled.div`
   ${(props) =>
     props.texto &&
     css`
-    padding-top: 20px;
+      padding-top: 20px;
       height: 100%;
       align-items: flex-start;
       gap: 5px;
     `}
 `;
-export default Producto;
+export { Producto, Title };

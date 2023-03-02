@@ -10,7 +10,7 @@ const Categoria = ({ tituloCategoria }) => {
       {/* Titulo */}
       <TituloCategoria>
         {tituloCategoria}
-        <MdOutlineKeyboardArrowRight style={{ marginBottom: "-2px" }} />
+        <MdOutlineKeyboardArrowRight color="#EEB800" size={25} style={{ marginBottom: "-7px" }} />
       </TituloCategoria>
       {/* Inicio de Carrusel */}
       {/* {myArray.map((producto) => {
@@ -55,6 +55,7 @@ const TituloCategoria = styled.h2`
   margin-left: 5px;
   cursor: pointer;
   margin-bottom: 10px;
+  overflow: hidden;
 `;
 
 export { Categoria, Container };

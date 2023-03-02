@@ -1,5 +1,5 @@
 import "../styles/slider.css";
-import Producto from "../components/Producto";
+import { Producto } from "../components/Producto";
 import { motion } from "framer-motion";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { useRef } from "react";
@@ -24,6 +24,7 @@ const Slider = ({ arrayProductos, filtroCategoria }) => {
                   categoria={producto.category}
                   key={producto.id}
                   precio={producto.price}
+                  id={producto.id}
                 />
               );
           })}
