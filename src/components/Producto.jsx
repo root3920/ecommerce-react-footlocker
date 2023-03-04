@@ -69,21 +69,32 @@ const Title = styled.p`
   ${(props) =>
     props.singlePage &&
     css`
-      font-size: 25px;
+      font-size: 4vmin;
       text-transform: none;
       width: 100%;
+      padding-right: 60px;
 
       &:hover {
         text-decoration: none;
       }
+
+      @media screen and (max-width: 600px) {
+        padding: 0 20px;
+      } ;
     `}
 `;
 
 const Price = styled.p`
-  font-size: 25px;
+  font-size: 5vmin;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
   color: #1c1a45;
+
+  ${(props) =>
+    props.singlePage &&
+    css`
+      margin-top: 20px;
+    `}
 `;
 
 const Contenedor = styled.div`
