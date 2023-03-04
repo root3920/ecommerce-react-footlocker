@@ -17,6 +17,7 @@ const Producto = ({ imagen, categoria, titulo, precio, id }) => {
     </ContenedorItem>
   );
 };
+
 const ContenedorItem = styled.div`
   width: 240px;
   height: 100%;
@@ -43,41 +44,45 @@ const Image = styled.img`
 `;
 
 const Category = styled.p`
-  @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
   font-size: 12px;
   font-weight: 400;
-  font-family: "Rubik", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #9f9997;
   text-transform: uppercase;
+
+  ${(props) =>
+    props.singlePage &&
+    css`
+      font-size: 14px;
+    `}
 `;
 const Title = styled.p`
-  @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
   font-size: 14px;
-  font-weight: bold;
-  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
   text-transform: uppercase;
 
   &:hover {
     text-decoration: underline;
   }
 
-  ${props => props.singlePage && css`
-  font-size: 20px;
-  margin-top: 50px;
-  text-transform: none;
+  ${(props) =>
+    props.singlePage &&
+    css`
+      font-size: 25px;
+      text-transform: none;
+      width: 100%;
 
-  &:hover {
-    text-decoration: none;
-
-  }
-  `}
+      &:hover {
+        text-decoration: none;
+      }
+    `}
 `;
 
 const Price = styled.p`
-  @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
   font-size: 25px;
   font-weight: bold;
-  font-family: "Rubik", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #1c1a45;
 `;
 
@@ -97,4 +102,4 @@ const Contenedor = styled.div`
       gap: 5px;
     `}
 `;
-export { Producto, Title };
+export { Producto, Title, Category, Price };

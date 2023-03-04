@@ -10,7 +10,11 @@ const Categoria = ({ tituloCategoria }) => {
       {/* Titulo */}
       <TituloCategoria>
         {tituloCategoria}
-        <MdOutlineKeyboardArrowRight color="#EEB800" size={25} style={{ marginBottom: "-7px" }} />
+        <MdOutlineKeyboardArrowRight
+          color="#EEB800"
+          size={25}
+          style={{ marginBottom: "-7px" }}
+        />
       </TituloCategoria>
       {/* Inicio de Carrusel */}
       {/* {myArray.map((producto) => {

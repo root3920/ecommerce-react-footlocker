@@ -25,7 +25,7 @@ const Header = () => {
             <FaSearch color="black" size={20} style={{ cursor: "pointer" }} />
           </Boton>
         </Form>
-        <NavLink to="/shop">
+        <NavLink to="/carrito">
           <FaShoppingCart
             color="white"
             size={25}

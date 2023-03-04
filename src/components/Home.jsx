@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Slider from "../functions/Slider";
 
 const Home = ({ productos }) => {
-  console.log(productos);
   return (
     <>
       <CarruselHome />

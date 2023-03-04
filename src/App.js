@@ -14,28 +14,39 @@ import ProductoSinglePage from "./components/ProductoSinglePage";
 
 function App() {
   const [productos, setProductos] = useState("");
+  const [compra, setCompra] = useState([]);
 
   useEffect(() => {
     allProducts(setProductos);
   }, []);
 
+  const sendToCar = (producto) => {
+    const compraActual = [...compra, producto];
+    setCompra(compraActual);
+  };
+
   return (
     <div className="App">
-        <Header />
+      <Header />
       <Routes>
         <Route path="/" element={<Home productos={productos} />} />
-        <Route path="/shop" element={<Carrito />} />
+        <Route path="/carrito" element={<Carrito compraActual={compra} />} />
         <Route path="/men" element={<Hombres />} />
         <Route path="/women" element={<Mujeres />} />
         <Route path="/kids" element={<Kids />} />
-        <Route path="/:id" element={<ProductoSinglePage productos={productos} />} />
+        <Route
+          path="/:id"
+          element={
+            <ProductoSinglePage productos={productos} sendToCar={sendToCar} />
+          }
+        />
         <Route path="/sale" element={<Sale />} />
 
         {/* Falta hacer la pagina de ERROR */}
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
-      </div>
+    </div>
   );
 }
 
