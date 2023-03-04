@@ -26,27 +26,29 @@ function App() {
   };
 
   return (
+    <> 
+    <Header />
     <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home productos={productos} />} />
-        <Route path="/carrito" element={<Carrito compraActual={compra} />} />
-        <Route path="/men" element={<Hombres />} />
-        <Route path="/women" element={<Mujeres />} />
-        <Route path="/kids" element={<Kids />} />
-        <Route
-          path="/:id"
-          element={
-            <ProductoSinglePage productos={productos} sendToCar={sendToCar} />
-          }
-        />
-        <Route path="/sale" element={<Sale />} />
-
-        {/* Falta hacer la pagina de ERROR */}
-        <Route path="*" element={<Home />} />
-      </Routes>
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home productos={productos} />} />
+      <Route path="/carrito" element={<Carrito compraActual={compra} />} />
+      <Route path="/men" element={<Hombres />} />
+      <Route path="/women" element={<Mujeres />} />
+      <Route path="/kids" element={<Kids />} />
+      <Route
+        path="/:id"
+        element={
+          <ProductoSinglePage productos={productos} sendToCar={sendToCar} />
+        }
+      />
+      <Route path="/sale" element={<Sale />} />
+      {/* Falta hacer la pagina de ERROR */}
+      <Route path="*" element={<Home />} />
+    </Routes>
+    <Footer />
+  </div>
+      </>
+   
   );
 }
 

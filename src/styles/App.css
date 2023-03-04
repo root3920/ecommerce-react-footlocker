@@ -10,9 +10,5 @@ body{
 }
 
 .App{
-    height: 100vh;
-}
-
-.main-contenedor{
-    height: 88vh;
+    min-height: 100vh;
 }

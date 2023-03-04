@@ -23,7 +23,9 @@ const ProductoSinglePage = ({ productos, sendToCar }) => {
         <Title singlePage>{productos[id - 1].title}</Title>
         <Category singlePage>{productos[id - 1].category}</Category>
         <Price singlePage>USD {productos[id - 1].price}</Price>
-        {/* Hacer una seccion de agregar la cantidad de productos a comprar */}
+
+
+        {/* Funcion de agregar la cantidad de productos a comprar */}
         <div style={{ display: "flex", padding: "20px 0" }}>
           <p>Cantidad</p>
           <BotonCantidad onClick={restarCantidad}>-</BotonCantidad>
