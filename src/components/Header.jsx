@@ -38,15 +38,13 @@ const Header = () => {
 };
 
 const Head = styled.div`
+  height: 12vh;
+  width: 100%;
   display: flex;
   padding: 0 30px;
   flex-direction: row;
   justify-content: space-between;
   background-color: black;
-  height: 12vh;
-  width: 100%;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 `;
 
 const Image = styled.img`
@@ -67,6 +65,7 @@ const Contenedor = styled.div`
     css`
       gap: 30px;
       width: 70%;
+      height: 100%;
       justify-content: flex-end;
     `}
 `;
@@ -79,6 +78,7 @@ const Input = styled.input`
   border-radius: 5px 0 0 5px;
   padding: 10px;
   transition: all 0.3s;
+  font-size: 16px;
 
   &:focus {
     width: 500px;

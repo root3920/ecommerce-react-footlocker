@@ -5,86 +5,99 @@ import { useState } from "react";
 
 const ProductoSinglePage = ({ productos, sendToCar }) => {
   const { id } = useParams();
-  const [cantidad, setCantidad] = useState(0);
+  const [cantidad, setCantidad] = useState(1);
 
   const restarCantidad = () => {
-    if (cantidad > 0) setCantidad(cantidad - 1);
+    if (cantidad > 1) setCantidad(cantidad - 1);
   };
 
   const sumarCantidad = () => setCantidad(cantidad + 1);
 
   return (
-    <ContenedorPrincipal>
-      <Contenedor imagen>
-        <Imagen src={productos[id - 1].image} alt="" />
-      </Contenedor>
+    <>
+      <ContenedorPrincipal>
+        <Contenedor imagen>
+          <Imagen src={productos[id - 1].image} alt="" />
+        </Contenedor>
+
+        <Contenedor>
+          <Title singlePage>{productos[id - 1].title}</Title>
+          <Category singlePage>{productos[id - 1].category}</Category>
+          <Category singlePageDescription>{productos[id - 1].description}</Category>
+          <Price singlePage>USD {productos[id - 1].price}</Price>
+
+          {/* Funcion de agregar la cantidad de productos a comprar */}
+          <div style={{ display: "flex", padding: "20px 0" }}>
+            <p>Cantidad</p>
+            <BotonCantidad onClick={restarCantidad}>-</BotonCantidad>
+            <p>{cantidad}</p>
+            <BotonCantidad onClick={sumarCantidad}>+</BotonCantidad>
+          </div>
+          <Boton onClick={() => sendToCar(productos[id - 1])}>
+            Añadir al Carrito
+          </Boton>
+        </Contenedor>
+
+        {/* ¡¡FALTA AGREGAR DESCRIPCION DEL PRODUCTO Y CARRUSEL DE RECOMENDACION!! */}
+      </ContenedorPrincipal>
 
       <Contenedor>
-        <Title singlePage>{productos[id - 1].title}</Title>
-        <Category singlePage>{productos[id - 1].category}</Category>
-        <Price singlePage>USD {productos[id - 1].price}</Price>
-
-
-        {/* Funcion de agregar la cantidad de productos a comprar */}
-        <div style={{ display: "flex", padding: "20px 0" }}>
-          <p>Cantidad</p>
-          <BotonCantidad onClick={restarCantidad}>-</BotonCantidad>
-          <p>{cantidad}</p>
-          <BotonCantidad onClick={sumarCantidad}>+</BotonCantidad>
-        </div>
-        <Boton onClick={() => sendToCar(productos[id - 1])}>
-          Añadir al Carrito
-        </Boton>
+        <div>Carrusel Recomendaciones</div>
       </Contenedor>
-
-      {/* ¡¡FALTA AGREGAR DESCRIPCION DEL PRODUCTO Y CARRUSEL DE RECOMENDACION!! */}
-    </ContenedorPrincipal>
+    </>
   );
 };
 
 const ContenedorPrincipal = styled.div`
-width: 100%
-height: 100%;
-display: flex;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
 
-@media screen and (max-width: 600px){
-  flex-direction: column;
-};
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    height: 100%;
+  } ;
 `;
 
 const Contenedor = styled.div`
   width: 100%;
-  height: 88vh;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  padding-top: 80px;
+  flex-direction: column;  
+  padding: 35px;
+  margin-top: 40px;
 
   ${(props) =>
     props.imagen &&
     css`
       justify-content: center;
       align-items: center;
-      padding-top: 0;
+      padding: 0;
+      margin-top: 60px;
     `}
 
   @media screen and (max-width: 600px) {
     align-items: center;
     text-align: center;
-    height: 50vh;
-    padding-top: 0;
+    height: 100%;
+    margin-top: 10px;
+
+
+    ${(props) =>
+      props.imagen &&
+      css`
+        margin-top: 50px;
+      `}
   } ;
 `;
 
 const Imagen = styled.img`
-  max-height: 500px;
-  max-width: 100%;
-  padding: 20px;
+  max-height: 450px;
+  max-width: 70%;
 
   @media screen and (max-width: 600px) {
-    max-height: 500px;
+    max-height: 300px;
     max-width: 100%;
-    padding: 20px;
-    margin-top: 20px;
   }
 `;
 

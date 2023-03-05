@@ -5,11 +5,6 @@ import { BsGithub, BsLinkedin } from "react-icons/bs";
 const Footer = () => {
   return (
     <Foot>
-      <style>
-        @import
-        url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-      </style>
-
       <Contenedor>
         <Image
           src="https://www.footlocker.com/built/257/images/FL/logo.svg"
@@ -39,10 +34,10 @@ const Footer = () => {
   );
 };
 
-const Foot = styled.footer`
+const Foot = styled.div`
   background-color: black;
   width: 100%;
-  height: 12vh;
+  height: 52px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

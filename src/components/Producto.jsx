@@ -55,6 +55,14 @@ const Category = styled.p`
     css`
       font-size: 14px;
     `}
+
+    ${(props) =>
+      props.singlePageDescription &&
+      css`
+      text-transform: none;
+      margin-top: 20px;
+      font-size: 12px;
+      `}
 `;
 const Title = styled.p`
   font-size: 14px;

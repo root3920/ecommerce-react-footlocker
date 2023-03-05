@@ -6,7 +6,7 @@ import Slider from "../functions/Slider";
 
 const Home = ({ productos }) => {
   return (
-    <>
+    <div style={{height: '100%'}}>
       <CarruselHome />
       <ContenedorPrincipal>
         <MenuHome />
@@ -32,7 +32,8 @@ const Home = ({ productos }) => {
         {/* Slider #3 */}
         <Slider arrayProductos={productos} filtroCategoria="electronics" />
       </ContenedorPrincipal>
-    </>
+ 
+    </div>
   );
 };
 
