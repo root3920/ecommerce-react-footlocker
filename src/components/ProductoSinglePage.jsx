@@ -2,10 +2,20 @@ import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { Title, Category, Price } from "./Producto";
 import { useState } from "react";
+import Slider from "../functions/Slider";
 
 const ProductoSinglePage = ({ productos, sendToCar }) => {
   const { id } = useParams();
   const [cantidad, setCantidad] = useState(1);
+
+  const productoActual = {
+    title: productos[id - 1].title,
+    image: productos[id - 1].title,
+    category: productos[id - 1].category,
+    description: productos[id - 1].description,
+    price: productos[id - 1].price,
+    cantidad: cantidad
+  }
 
   const restarCantidad = () => {
     if (cantidad > 1) setCantidad(cantidad - 1);
@@ -17,14 +27,17 @@ const ProductoSinglePage = ({ productos, sendToCar }) => {
     <>
       <ContenedorPrincipal>
         <Contenedor imagen>
+       
           <Imagen src={productos[id - 1].image} alt="" />
         </Contenedor>
 
         <Contenedor>
-          <Title singlePage>{productos[id - 1].title}</Title>
-          <Category singlePage>{productos[id - 1].category}</Category>
-          <Category singlePageDescription>{productos[id - 1].description}</Category>
-          <Price singlePage>USD {productos[id - 1].price}</Price>
+          <Title singlePage>{productoActual.title}</Title>
+          <Category singlePage>{productoActual.category}</Category>
+          <Category singlePageDescription>
+            {productoActual.description}
+          </Category>
+          <Price singlePage>USD {productoActual.price}</Price>
 
           {/* Funcion de agregar la cantidad de productos a comprar */}
           <div style={{ display: "flex", padding: "20px 0" }}>
@@ -33,7 +46,7 @@ const ProductoSinglePage = ({ productos, sendToCar }) => {
             <p>{cantidad}</p>
             <BotonCantidad onClick={sumarCantidad}>+</BotonCantidad>
           </div>
-          <Boton onClick={() => sendToCar(productos[id - 1])}>
+          <Boton onClick={() => sendToCar(productoActual)}>
             Añadir al Carrito
           </Boton>
         </Contenedor>
@@ -41,8 +54,12 @@ const ProductoSinglePage = ({ productos, sendToCar }) => {
         {/* ¡¡FALTA AGREGAR DESCRIPCION DEL PRODUCTO Y CARRUSEL DE RECOMENDACION!! */}
       </ContenedorPrincipal>
 
-      <Contenedor>
-        <div>Carrusel Recomendaciones</div>
+      <Contenedor carrusel>
+        <Slider
+          arrayProductos={productos}
+          filtroCategoria={productoActual.category}
+          tituloCategoria="Te podria interesar"
+        />
       </Contenedor>
     </>
   );
@@ -63,7 +80,7 @@ const Contenedor = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   padding: 35px;
   margin-top: 40px;
 
@@ -76,17 +93,30 @@ const Contenedor = styled.div`
       margin-top: 60px;
     `}
 
+  ${(props) =>
+    props.carrusel &&
+    css`
+      padding: 20px;
+    `}
+
   @media screen and (max-width: 600px) {
     align-items: center;
     text-align: center;
     height: 100%;
     margin-top: 10px;
 
-
     ${(props) =>
       props.imagen &&
       css`
         margin-top: 50px;
+      `}
+
+    ${(props) =>
+      props.carrusel &&
+      css`
+        padding: 20px;
+        align-items: start;
+        text-align: start;
       `}
   } ;
 `;

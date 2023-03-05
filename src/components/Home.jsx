@@ -6,33 +6,32 @@ import Slider from "../functions/Slider";
 
 const Home = ({ productos }) => {
   return (
-    <div style={{height: '100%'}}>
+    <div style={{ height: "100%" }}>
       <CarruselHome />
       <ContenedorPrincipal>
         <MenuHome />
-        <Categoria
-          productos={productos}
-          tituloCategoria="Favorito para ellos"
-          filtroCategoria="men's clothing"
-        />
-        {/* Slider #1 */}
-        <Slider arrayProductos={productos} filtroCategoria="men's clothing" />
 
-        <Categoria
-          productos={productos}
+        {/* Slider #1 */}
+        <Slider
+          arrayProductos={productos}
+          filtroCategoria="men's clothing"
+          tituloCategoria="Favorito para ellos"
+        />
+
+        {/* Slider #2 */}
+        <Slider
+          arrayProductos={productos}
+          filtroCategoria="women's clothing"
           tituloCategoria="Favorito para ellas"
         />
-        {/* Slider #2 */}
-        <Slider arrayProductos={productos} filtroCategoria="women's clothing" />
 
-        <Categoria
-          productos={productos}
+        {/* Slider #3 */}
+        <Slider
+          arrayProductos={productos}
+          filtroCategoria="electronics"
           tituloCategoria="Productos Electronicos para ti"
         />
-        {/* Slider #3 */}
-        <Slider arrayProductos={productos} filtroCategoria="electronics" />
       </ContenedorPrincipal>
- 
     </div>
   );
 };

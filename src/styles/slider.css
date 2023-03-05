@@ -1,22 +1,13 @@
-.item {
-  height: 100%;
-  min-width: 20rem;
-  padding: 4rem;
-}
-.item img {
-  height: 200px;
-  width: 100%;
-  pointer-events: none;
-}
 .slider {
   display: flex;
   position: relative;
   transition: all 1s;
   overflow: hidden;
+  justify-content: center;
 }
 .slider-container {
   margin: 0 auto;
-  padding-right: 10px;
+  /* padding-right: 10px; */
   overflow: hidden;
   position: static;
   margin-top: 0px;
