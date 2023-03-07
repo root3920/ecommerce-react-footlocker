@@ -8,8 +8,9 @@
 body {
   background-color: #e8e8e876;
   overflow-x: hidden;
+  height: 100%;
 }
 
 .App {
-  min-height: 100vh;
+  min-height: 80vh;
 }

@@ -24,12 +24,10 @@ const ContenedorItem = styled.div`
   padding: 20px;
   margin: 0 30px;
   cursor: pointer;
-
   a {
     text-decoration: none;
     color: black;
   }
-
   &:hover {
     Title {
       text-decoration: underline;
@@ -49,13 +47,11 @@ const Category = styled.p`
   font-family: "Poppins", sans-serif;
   color: #9f9997;
   text-transform: uppercase;
-
   ${(props) =>
     props.singlePage &&
     css`
       font-size: 14px;
     `}
-
     ${(props) =>
       props.singlePageDescription &&
       css`
@@ -69,11 +65,9 @@ const Title = styled.p`
   font-weight: 400;
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
-
   &:hover {
     text-decoration: underline;
   }
-
   ${(props) =>
     props.singlePage &&
     css`
@@ -81,11 +75,9 @@ const Title = styled.p`
       text-transform: none;
       width: 100%;
       padding-right: 60px;
-
       &:hover {
         text-decoration: none;
       }
-
       @media screen and (max-width: 600px) {
         padding: 0 20px;
       } ;
@@ -97,7 +89,6 @@ const Price = styled.p`
   font-weight: bold;
   font-family: "Poppins", sans-serif;
   color: #1c1a45;
-
   ${(props) =>
     props.singlePage &&
     css`
@@ -111,7 +102,6 @@ const Contenedor = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   ${(props) =>
     props.texto &&
     css`

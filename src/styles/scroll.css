@@ -1,0 +1,12 @@
+.indicator::-webkit-scrollbar{
+width: 8px;
+background-color: rgba(136, 136, 141, 0.205);;
+}
+
+.indicator::-webkit-scrollbar-thumb{
+   background-color: rgb(136, 136, 141);
+   width: 10px;
+   height: 10px;
+   border-radius: 10px;
+   cursor: pointer;
+    }
