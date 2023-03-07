@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
-import { FaShoppingCart, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import "../styles/carritoIcon.css";
 
-const Header = () => {
+const Header = ({ estadoCarrito, itemsEnCarro = 0 }) => {
   const onSubmit = (e) => {
     e.preventDefault();
   };
@@ -25,13 +26,19 @@ const Header = () => {
             <FaSearch color="black" size={20} style={{ cursor: "pointer" }} />
           </Boton>
         </Form>
-        <NavLink to="/carrito">
-          <FaShoppingCart
-            color="white"
-            size={25}
-            style={{ cursor: "pointer" }}
-          />
-        </NavLink>
+
+        <div
+          style={{
+            position: "static",
+            display: "flex",
+            flexDirection: "row-reverse",
+          }}
+        >
+          <div className={itemsEnCarro > 0 ? "carrito_lleno" : ""}>
+            {itemsEnCarro}
+          </div>
+          <NavLink to="/carrito">{estadoCarrito}</NavLink>
+        </div>
       </Contenedor>
     </Head>
   );

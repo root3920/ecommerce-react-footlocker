@@ -14,3 +14,9 @@ body {
 .App {
   min-height: 80vh;
 }
+
+.notie-container {
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  height: 12vh;
+}

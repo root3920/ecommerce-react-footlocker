@@ -12,18 +12,31 @@ import Footer from "./components/Footer";
 import { Header } from "./components/Header";
 import ProductoSinglePage from "./components/ProductoSinglePage";
 import GoToTop from "./functions/go-to-top";
-import { Alert } from "@mui/material";
+import notie from "notie";
+import { FaShoppingCart } from "react-icons/fa";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 function App() {
+  
+  //Estados
   const [productos, setProductos] = useState("");
   const [compra, setCompra] = useState([]);
-  const [noti, setNoti] = useState("");
   const [total, setTotal] = useState(0);
+  const [estadoCarrito, setEstadoCarrito] = useState(
+    <AiOutlineShoppingCart
+      color="white"
+      size={25}
+      style={{ cursor: "pointer", marginTop: "5px" }}
+    />
+  );
+  const [numItems, setNumItems] = useState(0);
 
+  //Llamada a Api para mostrar productos
   useEffect(() => {
     allProducts(setProductos);
   }, []);
 
+  //Envia items al carrito
   const sendToCar = (producto) => {
     const compraActual = [...compra, producto];
 
@@ -31,6 +44,7 @@ function App() {
     if (compra.length === 0) {
       setCompra(compraActual);
       setTotal(total + producto.price * producto.cantidad);
+      setNumItems(compraActual.length);
     } else {
       const nuevaCompra = [...compra];
       //Comprobamos si en el carrito ya existe el elemento a Agregar
@@ -70,28 +84,73 @@ function App() {
       }
       setTotal(total + producto.price * producto.cantidad);
       setCompra(nuevaCompra);
+      setNumItems(nuevaCompra.length);
     }
 
     //Añade una Notificacion en la pantalla cuando el usuario de clic en agregar al carrito
-    // setNoti(
-    //   <Alert variant="filled" severity="success">
-    //     ¡Producto añadido correctamente al carrito!
-    //   </Alert>
-    // );
-    // setTimeout(() => {
-    //   setNoti("");
-    // }, 2000);
+    notie.alert({
+      type: 1,
+      text: "¡Producto agregado al carrito!",
+      time: 2,
+      position: "bottom",
+    });
+
+    //Cambia el estado del Carrito
+    setEstadoCarrito(
+      <FaShoppingCart
+        color="white"
+        size={23}
+        style={{ cursor: "pointer", marginTop: "5px" }}
+      />
+    );
+  };
+
+  //Borra la compra actual del carrito
+  const borrarCompra = () => {
+    setCompra([]);
+    setEstadoCarrito(
+      <AiOutlineShoppingCart
+        color="white"
+        size={25}
+        style={{ cursor: "pointer", marginTop: "5px" }}
+      />
+    );
+    setNumItems(0);
+    setTotal(0);
+
+    //Notificacion de Pedido Cancelado
+    if (numItems > 0) {
+      notie.alert({
+        type: "error",
+        text: "¡Pedido Cancelado!",
+        time: 2,
+        position: "bottom",
+      });
+    } else {
+      notie.alert({
+        type: "warning",
+        text: "¡Haz una compra primero!",
+        time: 2,
+        position: "bottom",
+      });
+    }
   };
 
   return (
     <>
-      <Header />
+      <Header estadoCarrito={estadoCarrito} itemsEnCarro={numItems} />
       <main className="App">
         <Routes>
           <Route path="/" element={<Home productos={productos} />} />
           <Route
             path="/carrito"
-            element={<Carrito compraActual={compra} totalCompra={total} />}
+            element={
+              <Carrito
+                compraActual={compra}
+                totalCompra={total}
+                borrarCompra={borrarCompra}
+              />
+            }
           />
           <Route path="/men" element={<Hombres />} />
           <Route path="/women" element={<Mujeres />} />
@@ -99,11 +158,7 @@ function App() {
           <Route
             path="/:id"
             element={
-              <ProductoSinglePage
-                productos={productos}
-                sendToCar={sendToCar}
-                notificacion={noti}
-              />
+              <ProductoSinglePage productos={productos} sendToCar={sendToCar} />
             }
           />
           <Route path="/sale" element={<Sale />} />
