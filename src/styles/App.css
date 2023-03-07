@@ -16,7 +16,8 @@ body {
 }
 
 .notie-container {
-  font-size: 20px;
+  font-size: 18px;
   font-family: "Poppins", sans-serif;
-  height: 12vh;
+  height: 10vh;
+  overflow: hidden;
 }
