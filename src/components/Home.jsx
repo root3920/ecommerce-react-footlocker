@@ -1,6 +1,5 @@
 import CarruselHome from "./CarruselHome";
 import MenuHome from "./MenuHome";
-import { Categoria } from "./Categoria";
 import styled from "styled-components";
 import Slider from "../functions/Slider";
 
@@ -31,6 +30,7 @@ const Home = ({ productos }) => {
           filtroCategoria="electronics"
           tituloCategoria="Productos Electronicos para ti"
         />
+
       </ContenedorPrincipal>
     </div>
   );

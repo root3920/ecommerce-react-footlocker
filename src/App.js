@@ -2,10 +2,7 @@ import "./styles/App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Carrito from "./components/Carrito";
-import Hombres from "./components/Hombres";
-import Mujeres from "./components/Mujeres";
-import Sale from "./components/Sale";
-import Kids from "./components/Kids";
+import Categoria from "./components/Categoria";
 import { useEffect, useState } from "react";
 import { allProducts } from "./functions/funciones";
 import Footer from "./components/Footer";
@@ -17,7 +14,6 @@ import { FaShoppingCart } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 function App() {
-  
   //Estados
   const [productos, setProductos] = useState("");
   const [compra, setCompra] = useState([]);
@@ -152,16 +148,43 @@ function App() {
               />
             }
           />
-          <Route path="/men" element={<Hombres />} />
-          <Route path="/women" element={<Mujeres />} />
-          <Route path="/kids" element={<Kids />} />
+          <Route
+            path="/men"
+            element={
+              <Categoria
+                productos={productos}
+                category="men's clothing"
+                link="men"
+              />
+            }
+          />
+          <Route
+            path="/women"
+            element={
+              <Categoria
+                productos={productos}
+                category="women's clothing"
+                link="women"
+              />
+            }
+          />
+
+          <Route
+            path="/electronics"
+            element={
+              <Categoria
+                productos={productos}
+                category="electronics"
+                link="electronics"
+              />
+            }
+          />
           <Route
             path="/:id"
             element={
               <ProductoSinglePage productos={productos} sendToCar={sendToCar} />
             }
           />
-          <Route path="/sale" element={<Sale />} />
           {/* Falta hacer la pagina de ERROR */}
           <Route path="*" element={<Home />} />
         </Routes>

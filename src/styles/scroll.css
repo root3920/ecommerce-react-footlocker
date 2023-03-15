@@ -1,12 +1,35 @@
-.indicator::-webkit-scrollbar{
-width: 8px;
-background-color: rgba(136, 136, 141, 0.205);;
+.indicator::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgba(136, 136, 141, 0.205);
 }
 
-.indicator::-webkit-scrollbar-thumb{
-   background-color: rgb(136, 136, 141);
-   width: 10px;
-   height: 10px;
-   border-radius: 10px;
-   cursor: pointer;
-    }
+.indicator::-webkit-scrollbar-thumb {
+  background-color: rgb(136, 136, 141);
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.contenedor-items {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  width: 55%;
+  padding: 20px;
+  min-height: 80vh;
+  overflow-y: visible;
+}
+
+.carrito-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 55%;
+  padding: 20px;
+  min-height: 80vh;
+  overflow-y: visible;
+  color: black;
+}

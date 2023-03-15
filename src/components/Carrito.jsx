@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import Item from "./Item";
 import "../styles/scroll.css";
 import { NavLink } from "react-router-dom";
+import carroVacio from "../images/carro-vacio.png";
 
 const Carrito = ({ compraActual, totalCompra, borrarCompra }) => {
   const impuesto = (a, b) => (a * b) / 100;
@@ -13,21 +14,48 @@ const Carrito = ({ compraActual, totalCompra, borrarCompra }) => {
 
   return (
     <Container>
-      <AlLado derecho>
-        {compraActual.map((item) => {
-          if (item)
-            return (
-              <Item
-                title={item.title}
-                image={item.image}
-                category={item.category}
-                amount={item.cantidad}
-                price={item.price}
-                key={item.id}
-              />
-            );
-        })}
-      </AlLado>
+      <div
+        className={
+          compraActual.length > 0 ? "contenedor-items" : "carrito-vacio"
+        }
+      >
+        {compraActual.length > 0 ? (
+          compraActual.map((item) => {
+            if (item)
+              return (
+                <Item
+                  title={item.title}
+                  image={item.image}
+                  category={item.category}
+                  amount={item.cantidad}
+                  price={item.price}
+                  key={item.id}
+                />
+              );
+          })
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image src={carroVacio} alt="" />
+            <p
+              style={{
+                fontSize: "20px",
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: "bold",
+                marginLeft: "45px",
+              }}
+            >
+              El carrito está vacio
+            </p>
+          </div>
+        )}
+      </div>
 
       <AlLado>
         <Column>
@@ -99,20 +127,6 @@ display: flex;
 flex-direction: column;
 justify-content: flex-end;
 
-
-${(props) =>
-  props.derecho &&
-  css`
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: flex-start;
-    width: 55%;
-    padding: 20px;
-    min-height: 80vh;
-    overflow-y: visible;
-  `}
-
   @media screen and (max-width: 750px){
     width: 100%
   }
@@ -151,6 +165,11 @@ const Boton = styled.div`
   cursor: pointer;
   border-radius: 7px;
   text-decoration: none;
+`;
+
+const Image = styled.img`
+  height: 200px;
+  width: 200px;
 `;
 
 export default Carrito;

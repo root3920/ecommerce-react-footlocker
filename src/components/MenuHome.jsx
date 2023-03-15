@@ -29,11 +29,11 @@ const MenuHome = () => {
           <Image src={mujer} alt="" />
           Mujeres
         </Boton>
-        <Boton as={NavLink} to="/kids">
+        <Boton as={NavLink} to="/">
           <Image src={kids} alt="" />
           Niños
         </Boton>
-        <Boton as={NavLink} to="/sale">
+        <Boton as={NavLink} to="/electronics">
           <Image src={iphone} alt="" />
           Sale
         </Boton>

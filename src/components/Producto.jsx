@@ -1,8 +1,28 @@
 import styled, { css } from "styled-components";
 import { NavLink } from "react-router-dom";
 
-const Producto = ({ imagen, categoria, titulo, precio, id }) => {
-  return (
+const Producto = ({
+  imagen,
+  categoria,
+  titulo,
+  precio,
+  id,
+  categoryPage = false,
+}) => {
+  return categoryPage ? (
+    <ContenedorItem catePage>
+      <NavLink to={`/${id}`}>
+        <ContenedorCategoryPage>
+          <Image src={imagen} alt="" />
+        </ContenedorCategoryPage>
+        <ContenedorCategoryPage texto>
+          <Category>{categoria}</Category>
+          <Title>{titulo}</Title>
+          <Price>USD {precio}</Price>
+        </ContenedorCategoryPage>
+      </NavLink>
+    </ContenedorItem>
+  ) : (
     <ContenedorItem>
       <NavLink to={`/${id}`}>
         <Contenedor>
@@ -33,6 +53,21 @@ const ContenedorItem = styled.div`
       text-decoration: underline;
     }
   }
+  ${(props) =>
+    props.catePage &&
+    css`
+      height: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+      background-color: white;
+
+      &:hover {
+        outline: solid 2px black;
+        border-bottom: solid 5px black;
+      }
+    `}
 `;
 
 const Image = styled.img`
@@ -52,13 +87,13 @@ const Category = styled.p`
     css`
       font-size: 14px;
     `}
-    ${(props) =>
-      props.singlePageDescription &&
-      css`
+  ${(props) =>
+    props.singlePageDescription &&
+    css`
       text-transform: none;
       margin-top: 20px;
       font-size: 12px;
-      `}
+    `}
 `;
 const Title = styled.p`
   font-size: 14px;
@@ -107,6 +142,23 @@ const Contenedor = styled.div`
     css`
       padding-top: 20px;
       height: 100%;
+      align-items: flex-start;
+      gap: 5px;
+    `}
+`;
+
+const ContenedorCategoryPage = styled.div`
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${(props) =>
+    props.texto &&
+    css`
+      padding-top: 20px;
+      height: 50%;
       align-items: flex-start;
       gap: 5px;
     `}
