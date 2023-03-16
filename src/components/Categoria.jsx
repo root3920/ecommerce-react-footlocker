@@ -1,10 +1,13 @@
 import { Producto } from "./Producto";
 import styled, { css } from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { ContextoProducto } from "../context/contextoProductos";
 
-const Hombres = ({ productos, link, category }) => {
+const Categoria = ({ link, category }) => {
   const [maxRange, setMaxRange] = useState(10000);
+
+  const { productos } = useContext(ContextoProducto);
 
   const actualizarRango = (e) => setMaxRange(e.target.value);
 
@@ -96,10 +99,7 @@ const Hombres = ({ productos, link, category }) => {
 
       <GridDiv>
         {productos.map((producto) => {
-          if (
-            producto.category === category &&
-            producto.price < maxRange
-          )
+          if (producto.category === category && producto.price < maxRange)
             return (
               <Producto
                 imagen={producto.image}
@@ -177,4 +177,4 @@ const Input = styled.input`
   padding: 2px;
 `;
 
-export default Hombres;
+export default Categoria;

@@ -4,16 +4,19 @@ import { motion } from "framer-motion";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { useRef } from "react";
 import { anterior, siguiente } from "./anterior-siguiente-slider";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { useContext } from "react";
+import { ContextoProducto } from "../context/contextoProductos";
 
-const Slider = ({ arrayProductos, filtroCategoria, tituloCategoria }) => {
+const Slider = ({ filtroCategoria, tituloCategoria }) => {
   const slider = useRef(null);
-  let myArray = Array.from(arrayProductos);
+  const { productos } = useContext(ContextoProducto);
+  let myArray = Array.from(productos);
 
   return (
     <Container slider>
-        <TituloCategoria>
+      <TituloCategoria>
         {tituloCategoria}
         <MdOutlineKeyboardArrowRight
           color="#EEB800"
@@ -67,17 +70,15 @@ const TituloCategoria = styled.h2`
 `;
 
 const Container = styled.div`
-
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 20px;
-
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 20px;
 `;
 
 export default Slider;

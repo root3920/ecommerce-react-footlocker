@@ -3,24 +3,24 @@ import Item from "./Item";
 import "../styles/scroll.css";
 import { NavLink } from "react-router-dom";
 import carroVacio from "../images/carro-vacio.png";
+import { useContext } from "react";
+import { ContextoProducto } from "../context/contextoProductos";
 
-const Carrito = ({ compraActual, totalCompra, borrarCompra }) => {
+const Carrito = () => {
   const impuesto = (a, b) => (a * b) / 100;
-  const total = (a, b) => a + b;
+  const totalidad = (a, b) => a + b;
 
-  const impuestos = impuesto(totalCompra, 7);
+  const { compra, total, borrarCompra } = useContext(ContextoProducto);
 
-  const precioTotal = total(totalCompra, impuestos);
+  const impuestos = impuesto(total, 7);
+
+  const precioTotal = totalidad(total, impuestos);
 
   return (
     <Container>
-      <div
-        className={
-          compraActual.length > 0 ? "contenedor-items" : "carrito-vacio"
-        }
-      >
-        {compraActual.length > 0 ? (
-          compraActual.map((item) => {
+      <div className={compra.length > 0 ? "contenedor-items" : "carrito-vacio"}>
+        {compra.length > 0 ? (
+          compra.map((item) => {
             if (item)
               return (
                 <Item
@@ -61,11 +61,9 @@ const Carrito = ({ compraActual, totalCompra, borrarCompra }) => {
         <Column>
           <Row>
             <p>
-              {compraActual.length > 1
-                ? "Items sin descuento"
-                : "Item sin descuento"}
+              {compra.length > 1 ? "Items sin descuento" : "Item sin descuento"}
             </p>
-            <p>${totalCompra.toFixed(2)}</p>
+            <p>${total.toFixed(2)}</p>
           </Row>
           <Row>
             <p>Descuento</p>
@@ -74,7 +72,7 @@ const Carrito = ({ compraActual, totalCompra, borrarCompra }) => {
           <hr></hr>
           <Row>
             <p style={{ color: "gray" }}>Sub Total</p>
-            <p style={{ color: "gray" }}>${totalCompra.toFixed(2)}</p>
+            <p style={{ color: "gray" }}>${total.toFixed(2)}</p>
           </Row>
           <Row>
             <p style={{ color: "gray" }}>Impuestos</p>

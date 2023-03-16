@@ -1,12 +1,16 @@
 import { useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { Title, Category, Price } from "./Producto";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Slider from "../functions/Slider";
+import { ContextoProducto } from "../context/contextoProductos";
 
-const ProductoSinglePage = ({ productos, sendToCar }) => {
+const ProductoSinglePage = () => {
   const { id } = useParams();
   const [cantidad, setCantidad] = useState(1);
+
+  //Conectar al Contexto
+  const { productos, sendToCar } = useContext(ContextoProducto);
 
   const productoActual = {
     title: productos[id - 1].title,
@@ -16,7 +20,7 @@ const ProductoSinglePage = ({ productos, sendToCar }) => {
     price: productos[id - 1].price,
     cantidad: cantidad,
     id: productos[id - 1].id,
-  }
+  };
 
   const restarCantidad = () => {
     if (cantidad > 1) setCantidad(cantidad - 1);
@@ -28,7 +32,6 @@ const ProductoSinglePage = ({ productos, sendToCar }) => {
     <>
       <ContenedorPrincipal>
         <Contenedor imagen>
-       
           <Imagen src={productos[id - 1].image} alt="" />
         </Contenedor>
 

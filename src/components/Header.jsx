@@ -2,11 +2,15 @@ import styled, { css } from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import "../styles/carritoIcon.css";
+import React, { useContext } from "react";
+import { ContextoProducto } from "../context/contextoProductos";
 
-const Header = ({ estadoCarrito, itemsEnCarro = 0 }) => {
+const Header = () => {
   const onSubmit = (e) => {
     e.preventDefault();
   };
+
+  const { estadoCarrito, numItems } = useContext(ContextoProducto);
 
   return (
     <Head>
@@ -34,9 +38,7 @@ const Header = ({ estadoCarrito, itemsEnCarro = 0 }) => {
             flexDirection: "row-reverse",
           }}
         >
-          <div className={itemsEnCarro > 0 ? "carrito_lleno" : ""}>
-            {itemsEnCarro}
-          </div>
+          <div className={numItems > 0 ? "carrito_lleno" : ""}>{numItems}</div>
           <NavLink to="/carrito">{estadoCarrito}</NavLink>
         </div>
       </Contenedor>

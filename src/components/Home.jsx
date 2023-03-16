@@ -3,7 +3,7 @@ import MenuHome from "./MenuHome";
 import styled from "styled-components";
 import Slider from "../functions/Slider";
 
-const Home = ({ productos }) => {
+const Home = () => {
   return (
     <div style={{ height: "100%" }}>
       <CarruselHome />
@@ -12,25 +12,21 @@ const Home = ({ productos }) => {
 
         {/* Slider #1 */}
         <Slider
-          arrayProductos={productos}
           filtroCategoria="men's clothing"
           tituloCategoria="Favorito para ellos"
         />
 
         {/* Slider #2 */}
         <Slider
-          arrayProductos={productos}
           filtroCategoria="women's clothing"
           tituloCategoria="Favorito para ellas"
         />
 
         {/* Slider #3 */}
         <Slider
-          arrayProductos={productos}
           filtroCategoria="electronics"
           tituloCategoria="Productos Electronicos para ti"
         />
-
       </ContenedorPrincipal>
     </div>
   );
