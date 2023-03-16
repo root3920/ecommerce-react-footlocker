@@ -5,16 +5,13 @@ import { NavLink } from "react-router-dom";
 import carroVacio from "../images/carro-vacio.png";
 import { useContext } from "react";
 import { ContextoProducto } from "../context/contextoProductos";
+import { usePrecioTotal } from "../hooks/usePrecioTotal";
 
 const Carrito = () => {
-  const impuesto = (a, b) => (a * b) / 100;
-  const totalidad = (a, b) => a + b;
 
+  const { precioTotal, impuestos } = usePrecioTotal();
+  
   const { compra, total, borrarCompra } = useContext(ContextoProducto);
-
-  const impuestos = impuesto(total, 7);
-
-  const precioTotal = totalidad(total, impuestos);
 
   return (
     <Container>

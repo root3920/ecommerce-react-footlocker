@@ -9,8 +9,6 @@ import ProductoSinglePage from "./components/ProductoSinglePage";
 import GoToTop from "./functions/go-to-top";
 
 function App() {
-  //Conectar al contexto global
-
   return (
     <>
       <Header />
