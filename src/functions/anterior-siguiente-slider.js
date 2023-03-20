@@ -7,12 +7,12 @@ const siguiente = (slider) => {
     const primerElemento = slider.current.children[0];
 
     // Establecemos la transicion para el slider.
-    slider.current.style.transition = `500ms ease-out all`;
+    slider.current.style.transition = `1000ms ease-out all`;
 
     const tamañoSlide = slider.current.children[0].offsetWidth;
 
     // Movemos el slider
-    slider.current.style.transform = `translateX(-${tamañoSlide}px)`;
+    slider.current.style.transform = `translateX(-${tamañoSlide + 60}px)`;
 
     const transicion = () => {
       // Reiniciamos la posicion del slider.
@@ -40,7 +40,7 @@ const anterior = (slider) => {
 
     slider.current.style.transition = "none";
     const tamañoSlide = slider.current.children[0].offsetWidth;
-    slider.current.style.transform = `translateX(-${tamañoSlide}px)`;
+    slider.current.style.transform = `translateX(-${tamañoSlide + 60}px)`;
 
     setTimeout(() => {
       slider.current.style.transition = `900ms ease-out all`;

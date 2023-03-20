@@ -10,7 +10,7 @@ const Item = ({ image, title, amount, price, category }) => {
       <Imagen src={image} alt={category} height="100%" />
       <H3>{title}</H3>
       <H3 amount>Cantidad: {amount}</H3>
-      <H3 amount>USD {precioFinal}</H3>
+      <H3 amount>USD {precioFinal.toFixed(2)}</H3>
     </Div>
   );
 };

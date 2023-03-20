@@ -14,18 +14,21 @@ const Home = () => {
         <Slider
           filtroCategoria="men's clothing"
           tituloCategoria="Favorito para ellos"
+          link='men'
         />
 
         {/* Slider #2 */}
         <Slider
           filtroCategoria="women's clothing"
           tituloCategoria="Favorito para ellas"
+          link='women'
         />
 
         {/* Slider #3 */}
         <Slider
           filtroCategoria="electronics"
           tituloCategoria="Productos Electronicos para ti"
+          link='electronics'
         />
       </ContenedorPrincipal>
     </div>

@@ -7,10 +7,9 @@ import { useContext } from "react";
 import { ContextoProducto } from "../context/contextoProductos";
 import { usePrecioTotal } from "../hooks/usePrecioTotal";
 
-const Carrito = () => {
-
+const Carrito = ({ setAbrirModal }) => {
   const { precioTotal, impuestos } = usePrecioTotal();
-  
+
   const { compra, total, borrarCompra } = useContext(ContextoProducto);
 
   return (
@@ -90,7 +89,7 @@ const Carrito = () => {
             SEGUIR COMPRANDO
           </Boton>
           <Boton onClick={() => borrarCompra()}>BORRAR MI PEDIDO</Boton>
-          <Boton>HACER COMPRA</Boton>
+          <Boton onClick={() => setAbrirModal(true)}>HACER COMPRA</Boton>
         </Column>
       </AlLado>
     </Container>
@@ -100,7 +99,7 @@ const Carrito = () => {
 const Container = styled.div`
 height: 88vh;
 width: 100%;
-color white;
+color black;
 display: flex;
 overflow-y: hidden;
 
@@ -108,6 +107,12 @@ overflow-y: hidden;
   flex-direction: column;
   height: 100%;
 }
+
+${(props) =>
+  props.inicioSesion &&
+  css`
+  overflow-y: auto;
+  `}
 
 `;
 
@@ -160,6 +165,15 @@ const Boton = styled.div`
   cursor: pointer;
   border-radius: 7px;
   text-decoration: none;
+
+  ${(props) =>
+    props.inicioSesion &&
+    css`
+      height: 45px;
+      font-weight: 500;
+      border-radius: 5px;
+      font-size: 2.8vmin;
+    `}
 `;
 
 const Image = styled.img`
@@ -167,4 +181,4 @@ const Image = styled.img`
   width: 200px;
 `;
 
-export default Carrito;
+export { Carrito, Boton, Container };

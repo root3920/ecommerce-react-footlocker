@@ -8,6 +8,7 @@ import { FaShoppingCart } from "react-icons/fa";
 const ContextoProducto = React.createContext();
 
 const Provedor = ({ children }) => {
+  //Declaracion de estados
   const [productos, setProductos] = useState("");
   const [compra, setCompra] = useState([]);
   const [total, setTotal] = useState(0);
@@ -20,6 +21,7 @@ const Provedor = ({ children }) => {
   );
   const [numItems, setNumItems] = useState(0);
 
+  //LLamado a la APi de los productos
   useEffect(() => {
     allProducts(setProductos);
   }, []);
@@ -94,7 +96,7 @@ const Provedor = ({ children }) => {
   };
 
   //Borra los items actuales del carrito
-  const borrarCompra = () => {
+  const borrarCompra = () => {  
     setCompra([]);
     setEstadoCarrito(
       <AiOutlineShoppingCart

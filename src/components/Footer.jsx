@@ -45,11 +45,11 @@ const Foot = styled.div`
 `;
 
 const H3 = styled.h3`
-  color: white;
+  color: ${(props) => (props.color ? "black" : "white")};
   font-family: "Poppins", sans-serif;
 `;
 
 const Enlace = styled.a`
   text-decoration: none;
 `;
-export default Footer;
+export { Footer, Enlace, H3 };

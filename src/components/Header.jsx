@@ -2,12 +2,19 @@ import styled, { css } from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import "../styles/carritoIcon.css";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ContextoProducto } from "../context/contextoProductos";
+import { BsPersonCircle } from "react-icons/bs";
 
-const Header = () => {
+const Header = ({ setBuscando, setBusqueda, setAbrirModal }) => {
+  const [input, setInput] = useState("");
+
+  //funcion para enviar formulario de busqueda
   const onSubmit = (e) => {
     e.preventDefault();
+    setBuscando(false);
+    setBusqueda(input);
+    setInput("");
   };
 
   const { estadoCarrito, numItems } = useContext(ContextoProducto);
@@ -15,7 +22,7 @@ const Header = () => {
   return (
     <Head>
       <Contenedor>
-        <NavLink to="/">
+        <NavLink to="/" onClick={() => setBuscando(true)}>
           <Image
             src="https://www.footlocker.com/built/257/images/FL/logo.svg"
             alt="logo"
@@ -25,7 +32,13 @@ const Header = () => {
 
       <Contenedor logos>
         <Form onSubmit={onSubmit}>
-          <Input type="text" placeholder="Search" />
+          <Input
+            type="text"
+            placeholder="Search"
+            name="buscador"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
           <Boton>
             <FaSearch color="black" size={20} style={{ cursor: "pointer" }} />
           </Boton>
@@ -41,6 +54,12 @@ const Header = () => {
           <div className={numItems > 0 ? "carrito_lleno" : ""}>{numItems}</div>
           <NavLink to="/carrito">{estadoCarrito}</NavLink>
         </div>
+        <BsPersonCircle
+          color="white"
+          size={23}
+          style={{ cursor: "pointer" }}
+          onClick={() => setAbrirModal(true)}
+        />
       </Contenedor>
     </Head>
   );
@@ -76,6 +95,16 @@ const Contenedor = styled.div`
       width: 70%;
       height: 100%;
       justify-content: flex-end;
+    `}
+
+  ${(props) =>
+    props.inicioSesion &&
+    css`
+      width: 100%;
+      height: auto;
+      justify-content: center;
+      gap: 30px;
+      padding-bottom: 50px;
     `}
 `;
 
@@ -125,4 +154,4 @@ const Boton = styled.button`
     height: 33px;
   }
 `;
-export { Header, Image, Contenedor };
+export { Header, Image, Contenedor, Boton };

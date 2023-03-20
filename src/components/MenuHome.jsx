@@ -35,7 +35,7 @@ const MenuHome = () => {
         </Boton>
         <Boton as={NavLink} to="/electronics">
           <Image src={iphone} alt="" />
-          Sale
+          Electronicos
         </Boton>
       </Contenedor>
     </>

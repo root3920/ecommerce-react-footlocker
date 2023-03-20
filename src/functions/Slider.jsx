@@ -1,22 +1,22 @@
 import "../styles/slider.css";
 import { Producto } from "../components/Producto";
+import { ContextoProducto } from "../context/contextoProductos";
 import { motion } from "framer-motion";
-import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
-import { useRef } from "react";
 import { anterior, siguiente } from "./anterior-siguiente-slider";
 import styled from "styled-components";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { useContext } from "react";
-import { ContextoProducto } from "../context/contextoProductos";
+import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
+import { useContext, useRef } from "react";
+import { NavLink } from "react-router-dom";
 
-const Slider = ({ filtroCategoria, tituloCategoria }) => {
+const Slider = ({ filtroCategoria, tituloCategoria, link }) => {
   const slider = useRef(null);
   const { productos } = useContext(ContextoProducto);
   let myArray = Array.from(productos);
 
   return (
     <Container slider>
-      <TituloCategoria>
+      <TituloCategoria as={NavLink} to={`/${link}`}>
         {tituloCategoria}
         <MdOutlineKeyboardArrowRight
           color="#EEB800"
@@ -24,6 +24,7 @@ const Slider = ({ filtroCategoria, tituloCategoria }) => {
           style={{ marginBottom: "-7px" }}
         />
       </TituloCategoria>
+
       <motion.div className="slider-container">
         <motion.div className="slider" ref={slider}>
           {/* Funcion Map que imprime todos los productos que existen en esa categoria */}
@@ -60,13 +61,16 @@ const Slider = ({ filtroCategoria, tituloCategoria }) => {
 };
 
 const TituloCategoria = styled.h2`
-  font-family: "Rubik", sans-serif;
+  font-family: "poppins", sans-serif;
+  color: black;
+  font-weight: bold;
   font-size: 16px;
   text-transform: uppercase;
   margin-left: 5px;
   cursor: pointer;
   margin-bottom: 10px;
   overflow: hidden;
+  text-decoration: none;
 `;
 
 const Container = styled.div`

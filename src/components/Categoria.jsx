@@ -11,6 +11,8 @@ const Categoria = ({ link, category }) => {
 
   const actualizarRango = (e) => setMaxRange(e.target.value);
 
+  console.log(category);
+
   return (
     <div style={{ display: "flex" }}>
       <aside style={{ width: "30%", padding: "50px" }}>
@@ -21,7 +23,7 @@ const Categoria = ({ link, category }) => {
         <Enlace as={NavLink} to={`/${link}`}>
           {category.toUpperCase()}
         </Enlace>
-        <TituloCategoria>Men's Clothing</TituloCategoria>
+        <TituloCategoria>{category.toUpperCase()}</TituloCategoria>
         <form>
           <SubTitulo>Tipo de Producto</SubTitulo>
           <hr style={{ border: "solid 1px black", marginBottom: "15px" }}></hr>
@@ -99,7 +101,10 @@ const Categoria = ({ link, category }) => {
 
       <GridDiv>
         {productos.map((producto) => {
-          if (producto.category === category && producto.price < maxRange)
+          if (
+            (producto.category === category && producto.price < maxRange) ||
+            producto.title.toLowerCase().includes(category.toLowerCase())
+          )
             return (
               <Producto
                 imagen={producto.image}
