@@ -11,7 +11,6 @@ const Categoria = ({ link, category }) => {
 
   const actualizarRango = (e) => setMaxRange(e.target.value);
 
-  console.log(category);
 
   return (
     <div style={{ display: "flex" }}>

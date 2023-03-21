@@ -1,7 +1,6 @@
 const siguiente = (slider) => {
   // Comprobamos que el slider tenga elementos
   if (slider.current.children.length > 0) {
-    console.log("Siguiente");
 
     // Obtenemos el primer elemento del slider.
     const primerElemento = slider.current.children[0];
@@ -31,7 +30,6 @@ const siguiente = (slider) => {
 };
 
 const anterior = (slider) => {
-  console.log("Anterior");
   if (slider.current.children.length > 0) {
     // Obtenemos el ultimo elemento del slider.
     const index = slider.current.children.length - 1;

@@ -20,6 +20,8 @@ const Provedor = ({ children }) => {
     />
   );
   const [numItems, setNumItems] = useState(0);
+  const [login, setLogin] = useState(false);
+
 
   //LLamado a la APi de los productos
   useEffect(() => {
@@ -126,6 +128,7 @@ const Provedor = ({ children }) => {
     }
   };
 
+
   return (
     <ContextoProducto.Provider
       value={{
@@ -136,6 +139,8 @@ const Provedor = ({ children }) => {
         numItems,
         sendToCar,
         borrarCompra,
+        login,
+        setLogin,
       }}
     >
       {children}

@@ -150,7 +150,7 @@ const Column = styled.div`
   margin: 20px;
 `;
 
-const Boton = styled.div`
+const Boton = styled.button`
   width: 100%;
   height: 35px;
   display: flex;
@@ -164,6 +164,7 @@ const Boton = styled.div`
   color: white;
   cursor: pointer;
   border-radius: 7px;
+  border: none;
   text-decoration: none;
 
   ${(props) =>

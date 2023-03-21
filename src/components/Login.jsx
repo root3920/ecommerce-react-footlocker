@@ -3,12 +3,8 @@ import styled, { css } from "styled-components";
 import { Boton } from "./Carrito";
 import Banners from "../images/Banner.jpg";
 
-const Login = ({ logueado }) => {
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  return logueado ? (
+const Login = () => {
+  return (
     <Contenedor>
       <Banner img>
         <img
@@ -18,11 +14,12 @@ const Login = ({ logueado }) => {
         />
       </Banner>
       <Banner>
-        <div style={{ height: "12%", textAlign: 'center' }}>
-          <h2>Inicia Sesión</h2>
-          <p>Entra a la comunidad de confianza</p>
+        <div style={{ height: "12%", textAlign: "center" }}>
+          <TituloForm>Inicia Sesión</TituloForm>
+          <SubtituloForm>Entra a la comunidad de confianza</SubtituloForm>
         </div>
-        <Form action="" onSubmit={onSubmit}>
+
+        <Form action="">
           <Div>
             <label htmlFor="email">Email</label>
             <Input
@@ -45,82 +42,7 @@ const Login = ({ logueado }) => {
             />
           </Div>
 
-          <Boton type="submit" inicioSesion>
-            Submit
-          </Boton>
-        </Form>
-      </Banner>
-    </Contenedor>
-  ) : (
-    <Contenedor>
-      <Banner img>
-        <img
-          src={Banners}
-          alt=""
-          style={{ objectFit: "cover", width: "100%", height: "100%" }}
-        />
-      </Banner>
-      <Banner>
-        <div style={{ height: "12%" }}>
-          <h2>Bienvenido a Footlocker 👋</h2>
-          <p>Necesitamos unos datos básicos para empezar</p>
-        </div>
-        <Form action="" onSubmit={onSubmit}>
-          <Div nombres>
-            <div>
-              <label htmlFor="name">Nombre</label>
-              <Input
-                type="text"
-                name="name"
-                placeholder="Ingrese su Nombre"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="last-name">Apellido</label>
-              <Input
-                type="text"
-                name="last-name"
-                placeholder="Ingrese su Apellido"
-                required
-              />
-            </div>
-          </Div>
-          <Div>
-            <label htmlFor="email">Email</label>
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Ingrese su correo"
-              required
-            />
-          </Div>
-
-          <Div>
-            <label htmlFor="password">Password</label>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Ingrese su contraseña"
-              required
-            />
-          </Div>
-
-          <Div>
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <Input
-              type="password"
-              name="confirm-password"
-              id="confirm-password"
-              placeholder="Confirme su contraseña"
-              required
-            />
-          </Div>
-          <Boton type="submit" inicioSesion>
-            Submit
-          </Boton>
+          <Boton>Iniciar Sesion</Boton>
         </Form>
       </Banner>
     </Contenedor>
@@ -135,6 +57,19 @@ const Form = styled.form`
   margin-top: 20px;
   overflow: hidden;
   gap: 15px;
+  padding: 0 100px;
+
+  @media screen and (max-width: 1000px) {
+    padding: 0 50px;
+  }
+
+  @media screen and (max-width: 750px) {
+    padding: 0 10px;
+  }
+
+  @media screen and (max-width: 630px) {
+    padding: 0 10%;
+  }
 `;
 const Banner = styled.div`
   width: 50%;
@@ -143,15 +78,24 @@ const Banner = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 100px;
+  padding: 50px 10px;
 
   ${(props) =>
     props.img &&
     css`
       width: 50%;
-      background-color: blue;
+      background-color: black;
       padding: 0;
+
+      @media screen and (max-width: 630px) {
+        width: 100%;
+        min-height: 20%;
+      }
     `}
+
+  @media screen and (max-width: 630px) {
+    width: 100%;
+  }
 `;
 
 const Input = styled.input`
@@ -180,6 +124,48 @@ const Contenedor = styled.div`
   justify-content: center;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
+
+  @media screen and (max-width: 630px) {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    height: 100%;
+  }
 `;
 
-export default Login;
+const TituloForm = styled.p`
+  font-size: 4vmin;
+  text-align: center;
+  font-weight: bold;
+
+  @media screen and (max-width: 750px) {
+    font-size: 3.4vmin;
+  }
+
+  @media screen and (max-width: 630px) {
+    font-size: 20px;
+  }
+`;
+
+const SubtituloForm = styled.p`
+  font-size: 2.5vmin;
+  text-align: center;
+
+  @media screen and (max-width: 750px) {
+    font-size: 2vmin;
+  }
+
+  @media screen and (max-width: 630px) {
+    font-size: 12px;
+  }
+`;
+
+export {
+  Login,
+  Contenedor,
+  Banner,
+  Input,
+  Form,
+  Div,
+  TituloForm,
+  SubtituloForm,
+};

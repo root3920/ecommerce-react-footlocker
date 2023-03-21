@@ -52,7 +52,9 @@ const Header = ({ setBuscando, setBusqueda, setAbrirModal }) => {
           }}
         >
           <div className={numItems > 0 ? "carrito_lleno" : ""}>{numItems}</div>
-          <NavLink to="/carrito">{estadoCarrito}</NavLink>
+          <NavLink to="/carrito" onClick={() => setBuscando(true)}>
+            {estadoCarrito}
+          </NavLink>
         </div>
         <BsPersonCircle
           color="white"

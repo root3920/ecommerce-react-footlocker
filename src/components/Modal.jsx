@@ -1,87 +1,97 @@
-import React from "react";
+import React, { useContext } from "react";
+import "animate.css";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { Boton } from "./Carrito";
 import { Contenedor } from "./Header";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { H3, Enlace } from "./Footer";
-import "animate.css";
 import { NavLink } from "react-router-dom";
+import { ContextoProducto } from "../context/contextoProductos";
 
-const Modal = ({ abrirModal, setAbrirModal, setLogin }) => {
-  if (!abrirModal) return null;
-  return (
-    <ContenedorModal className="animate__animated animate__fadeIn">
-      <Box>
-        <div style={{ padding: "0 30px" }}>
-          <AiOutlineClose
-            onClick={() => setAbrirModal(false)}
-            size={20}
-            style={{
-              cursor: "pointer",
-              position: "absolute",
-              top: "10",
-              right: "30",
-            }}
-          />
-          <P>Bienvenido a Footlokers</P>
-          <Boton
-            as={NavLink}
-            to="/login"
-            onClick={() => {
-              setAbrirModal(false);
-              setLogin(false);
-            }}
-            inicioSesion
-          >
-            Crear Cuenta
-          </Boton>
-          <SubTitulo>
-            ¿Tienes cuenta?
-            <NavLink
-              to="/login"
+//Falta cambiar el modal cuando se inicia sesion o se registra el usuario
+const Modal = ({ abrirModal, setAbrirModal }) => {
+  const { login } = useContext(ContextoProducto);
+
+  if (!abrirModal) {
+    return null;
+  } else {
+    return (
+      <ContenedorModal className="animate__animated animate__fadeIn">
+        <Box>
+          <div style={{ padding: "0 30px" }}>
+            <AiOutlineClose
+              onClick={() => setAbrirModal(false)}
+              size={20}
+              style={{
+                cursor: "pointer",
+                position: "absolute",
+                top: "10",
+                right: "30",
+              }}
+            />
+            <P>Bienvenido a Footlokers</P>
+            <Boton
+              as={NavLink}
+              to="/register"
               onClick={() => {
                 setAbrirModal(false);
-                setLogin(true);
               }}
+              inicioSesion
             >
-              <button
-                style={{
-                  backgroundColor: "white",
-                  border: "none",
-                  color: "#0694e0",
-                  textDecoration: "underline",
-                  margin: "0 3px",
-                  cursor: "pointer",
+              Crear Cuenta
+            </Boton>
+            <SubTitulo>
+              ¿Tienes cuenta?
+              <NavLink
+                to="/login"
+                onClick={() => {
+                  setAbrirModal(false);
                 }}
               >
-                Iniciar Sesión
-              </button>
-            </NavLink>
-          </SubTitulo>
-        </div>
-        <hr style={{ margin: "0 30px" }}></hr>
-        <Contenedor inicioSesion>
-          <a href="https://github.com/root3920" target="_blank">
-            <BsGithub color="black" size={20} style={{ cursor: "pointer" }} />
-          </a>
+                <button
+                  style={{
+                    backgroundColor: "white",
+                    border: "none",
+                    color: "#0694e0",
+                    textDecoration: "underline",
+                    margin: "0 3px",
+                    cursor: "pointer",
+                    fontSize: "2.5vmin",
+                  }}
+                >
+                  Iniciar Sesión
+                </button>
+              </NavLink>
+            </SubTitulo>
+          </div>
+          <hr style={{ margin: "0 30px" }}></hr>
+          <Contenedor inicioSesion>
+            <a href="https://github.com/root3920" target="_blank">
+              <BsGithub color="black" size={20} style={{ cursor: "pointer" }} />
+            </a>
 
-          <a
-            href="https://www.linkedin.com/in/federico-alarc%C3%B3n-3672a3200/"
-            target="_blank"
-          >
-            <BsLinkedin color="black" size={20} style={{ cursor: "pointer" }} />
-          </a>
-          <Enlace
-            href="https://drive.google.com/file/d/1VLD6BqjJsLwfqp4_yYAFmHgYMsPbTRbS/view?usp=share_link"
-            target="_blank"
-          >
-            <H3 color={true}>CV</H3>
-          </Enlace>
-        </Contenedor>
-      </Box>
-    </ContenedorModal>
-  );
+            <a
+              href="https://www.linkedin.com/in/federico-alarc%C3%B3n-3672a3200/"
+              target="_blank"
+            >
+              <BsLinkedin
+                color="black"
+                size={20}
+                style={{ cursor: "pointer" }}
+              />
+            </a>
+            <Enlace
+              href="https://drive.google.com/file/d/1VLD6BqjJsLwfqp4_yYAFmHgYMsPbTRbS/view?usp=share_link"
+              target="_blank"
+            >
+              <H3 color={true}>CV</H3>
+            </Enlace>
+          </Contenedor>
+        </Box>
+      </ContenedorModal>
+    );
+  }
 };
 
 const ContenedorModal = styled.div`
@@ -95,8 +105,8 @@ const ContenedorModal = styled.div`
 `;
 
 const Box = styled.div`
-  width: 35%;
-  height: 300px;
+  min-width: 35%;
+  max-height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -109,14 +119,14 @@ const Box = styled.div`
 
 const P = styled.p`
   font-family: "Poppins", sans-serif;
-  font-size: 20px;
+  font-size: 3vmin;
   font-weight: 600;
   padding: 40px 0;
 `;
 
 const SubTitulo = styled.p`
   font-family: "Poppins", sans-serif;
-  font-size: 13px;
+  font-size: 2.5vmin;
   font-weight: 400;
   padding: 10px 0;
 `;
