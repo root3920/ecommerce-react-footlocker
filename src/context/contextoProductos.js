@@ -21,7 +21,7 @@ const Provedor = ({ children }) => {
   );
   const [numItems, setNumItems] = useState(0);
   const [login, setLogin] = useState(false);
-
+  const [usuario, setUsuario] = useState({});
 
   //LLamado a la APi de los productos
   useEffect(() => {
@@ -98,7 +98,7 @@ const Provedor = ({ children }) => {
   };
 
   //Borra los items actuales del carrito
-  const borrarCompra = () => {  
+  const borrarCompra = () => {
     setCompra([]);
     setEstadoCarrito(
       <AiOutlineShoppingCart
@@ -128,7 +128,6 @@ const Provedor = ({ children }) => {
     }
   };
 
-
   return (
     <ContextoProducto.Provider
       value={{
@@ -141,6 +140,8 @@ const Provedor = ({ children }) => {
         borrarCompra,
         login,
         setLogin,
+        usuario,
+        setUsuario
       }}
     >
       {children}

@@ -1,9 +1,49 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Boton } from "./Carrito";
 import Banners from "../images/Banner.jpg";
+import { ContextoProducto } from "../context/contextoProductos";
+import db from "../firebase/firebaseConfig";
+import { onSnapshot, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { usuario, setUsuario, setLogin } = useContext(ContextoProducto);
+  const [listaUsuarios, setListaUsuarios] = useState([]);
+  const [correoIngresado, setCorreoIngresado] = useState([]);
+  const [passwordIngresado, setPasswordIngresado] = useState([]);
+
+  const navigate = useNavigate();
+
+  //Llamada a base de datos y exportando Usuarios
+  useEffect(() => {
+    onSnapshot(collection(db, "usuarios"), (snap) => {
+      const arregloUsuarios = snap.docs.map((objeto) => objeto.data());
+      setListaUsuarios(arregloUsuarios);
+    });
+  }, []);
+
+  const verificarLogin = async (e) => {
+    e.preventDefault();
+    //Filtramos los usuarios que coincidan con las credenciales ingresadas
+    const Usuario = listaUsuarios.filter((usuario) => {
+      if (
+        usuario.email === correoIngresado &&
+        usuario.password === passwordIngresado
+      )
+        return usuario.name;
+    });
+
+    //Seteamos el login
+    if (Usuario[0]) {
+      setUsuario(Usuario[0]);
+      setLogin(true);
+      navigate("/");
+    } else {
+      console.log("Usuario Incorrecto");
+    }
+  };
+
   return (
     <Contenedor>
       <Banner img>
@@ -19,7 +59,7 @@ const Login = () => {
           <SubtituloForm>Entra a la comunidad de confianza</SubtituloForm>
         </div>
 
-        <Form action="">
+        <Form action="" onSubmit={verificarLogin}>
           <Div>
             <label htmlFor="email">Email</label>
             <Input
@@ -27,6 +67,8 @@ const Login = () => {
               name="email"
               id="email"
               placeholder="Ingrese su correo"
+              value={correoIngresado}
+              onChange={(e) => setCorreoIngresado(e.target.value)}
               required
             />
           </Div>
@@ -38,6 +80,8 @@ const Login = () => {
               name="password"
               id="password"
               placeholder="Ingrese su contraseña"
+              value={passwordIngresado}
+              onChange={(e) => setPasswordIngresado(e.target.value)}
               required
             />
           </Div>

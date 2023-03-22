@@ -24,7 +24,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   //Conectarse al contexto
-  const { setLogin } = useContext(ContextoProducto);
+  const { setLogin, setUsuario } = useContext(ContextoProducto);
   const navigate = useNavigate();
 
   //Funcion que se ejecuta despues de enviar formulario
@@ -34,15 +34,6 @@ const Register = () => {
       password === confirmPassword &&
       (password !== "" || confirmPassword !== "")
     ) {
-      //Se crea un Objeto Usuario
-      const Usuario = {
-        name: nombre,
-        lastName: apellido,
-        fullName: `${nombre} ${apellido}`,
-        email: email,
-        password: password,
-      };
-
       // Add a new document with a generated id.
       const docRef = await addDoc(collection(db, "usuarios"), {
         name: Usuario.fullName,
@@ -56,13 +47,24 @@ const Register = () => {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+
+      //Se crea un Objeto Usuario
+      const Usuario = {
+        name: nombre,
+        lastName: apellido,
+        fullName: `${nombre} ${apellido}`,
+        email: email,
+        password: password,
+        id: docRef.id,
+      };
+      setUsuario(Usuario);
+
       setLogin(true);
-      navigate("/")
+      navigate("/");
     } else {
       console.log("Las contraseñas no son iguales");
       setPassword("");
       setConfirmPassword("");
-   
     }
   };
 
@@ -143,9 +145,7 @@ const Register = () => {
             />
           </Div>
 
-          <Boton inicioSesion>
-            Registrarse
-          </Boton>
+          <Boton inicioSesion>Registrarse</Boton>
         </Form>
       </Banner>
     </Contenedor>
