@@ -14,6 +14,7 @@ import { ContextoProducto } from "../context/contextoProductos";
 import db from "../firebase/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import notie from "notie";
 
 const Register = () => {
   //Estados del Formulario
@@ -30,41 +31,47 @@ const Register = () => {
   //Funcion que se ejecuta despues de enviar formulario
   const onSubmitRegister = async (e) => {
     e.preventDefault();
-    if (
-      password === confirmPassword &&
-      (password !== "" || confirmPassword !== "")
-    ) {
-      // Add a new document with a generated id.
-      const docRef = await addDoc(collection(db, "usuarios"), {
-        name: Usuario.fullName,
-        email: Usuario.email,
-        password: Usuario.password,
-      });
-      console.log("Document written with ID: ", docRef.id);
-
-      setNombre("");
-      setApellido("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-
-      //Se crea un Objeto Usuario
-      const Usuario = {
-        name: nombre,
-        lastName: apellido,
-        fullName: `${nombre} ${apellido}`,
-        email: email,
-        password: password,
-        id: docRef.id,
-      };
-      setUsuario(Usuario);
-
-      setLogin(true);
-      navigate("/");
-    } else {
-      console.log("Las contraseñas no son iguales");
-      setPassword("");
-      setConfirmPassword("");
+    try {
+      if (
+        password === confirmPassword &&
+        (password !== "" || confirmPassword !== "")
+      ) {
+        //Se crea un Objeto Usuario
+        const Usuario = {
+          name: nombre,
+          lastName: apellido,
+          fullName: `${nombre} ${apellido}`,
+          email: email,
+          password: password,
+        };
+        // Add a new document with a generated id.
+        const docRef = await addDoc(collection(db, "usuarios"), {
+          name: Usuario.fullName,
+          email: Usuario.email,
+          password: Usuario.password,
+        });
+        console.log("Document written with ID: ", docRef.id);
+        notie.alert({
+          type: 1,
+          text: "¡Registrado Correctamente!",
+          time: 2,
+          position: "bottom",
+        });
+        setNombre("");
+        setApellido("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setUsuario({ ...Usuario, id: docRef.id });
+        setLogin(true);
+        navigate("/");
+      } else {
+        console.log("Las contraseñas no son iguales");
+        setPassword("");
+        setConfirmPassword("");
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 

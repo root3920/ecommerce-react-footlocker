@@ -6,9 +6,10 @@ import { ContextoProducto } from "../context/contextoProductos";
 import db from "../firebase/firebaseConfig";
 import { onSnapshot, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import notie from "notie";
 
 const Login = () => {
-  const { usuario, setUsuario, setLogin } = useContext(ContextoProducto);
+  const { setUsuario, setLogin, usuario } = useContext(ContextoProducto);
   const [listaUsuarios, setListaUsuarios] = useState([]);
   const [correoIngresado, setCorreoIngresado] = useState([]);
   const [passwordIngresado, setPasswordIngresado] = useState([]);
@@ -18,7 +19,9 @@ const Login = () => {
   //Llamada a base de datos y exportando Usuarios
   useEffect(() => {
     onSnapshot(collection(db, "usuarios"), (snap) => {
-      const arregloUsuarios = snap.docs.map((objeto) => objeto.data());
+      const arregloUsuarios = snap.docs.map((objeto) => {
+        return objeto.data();
+      });
       setListaUsuarios(arregloUsuarios);
     });
   }, []);
@@ -30,19 +33,31 @@ const Login = () => {
       if (
         usuario.email === correoIngresado &&
         usuario.password === passwordIngresado
-      )
+      ) {
         return usuario.name;
+      } else {
+        return "";
+      }
     });
 
     //Seteamos el login
     if (Usuario[0]) {
       setUsuario(Usuario[0]);
+      console.log(usuario);
+      notie.alert({
+        type: 1,
+        text: `🎉Bienvenido de vuelta, ${Usuario[0].name}🎉`,
+        time: 2,
+        position: "bottom",
+      });
       setLogin(true);
       navigate("/");
     } else {
       console.log("Usuario Incorrecto");
     }
   };
+
+
 
   return (
     <Contenedor>
@@ -117,12 +132,11 @@ const Form = styled.form`
 `;
 const Banner = styled.div`
   width: 50%;
-  min-height: 100vh;
   overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 10px;
+  padding: 50px;
 
   ${(props) =>
     props.img &&
@@ -130,6 +144,7 @@ const Banner = styled.div`
       width: 50%;
       background-color: black;
       padding: 0;
+      min-height: 100vh;
 
       @media screen and (max-width: 630px) {
         width: 100%;
@@ -137,8 +152,9 @@ const Banner = styled.div`
       }
     `}
 
-  @media screen and (max-width: 630px) {
+  @media screen and (max-width: 1020px) {
     width: 100%;
+    padding: 50px 10px;
   }
 `;
 
@@ -148,6 +164,7 @@ const Input = styled.input`
   border-radius: 5px;
   border: 1px solid #808080;
   padding: 10px;
+  font-size: 16px;
 `;
 
 const Div = styled.div`
@@ -166,6 +183,7 @@ const Contenedor = styled.div`
   height: 88vh;
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
 

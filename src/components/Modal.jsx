@@ -13,11 +13,12 @@ import { BsPersonCircle } from "react-icons/bs";
 //Falta cambiar el modal cuando se inicia sesion o se registra el usuario
 const Modal = ({ abrirModal, setAbrirModal }) => {
   const { login, usuario, setLogin } = useContext(ContextoProducto);
-
+  console.log(usuario);
   if (!abrirModal) {
     return null;
   }
   return login ? (
+    //Modal cuando el Usuario esta logueado
     <ContenedorModal className="animate__animated animate__fadeIn">
       <Box>
         <div style={{ padding: "0 30px" }}>
@@ -38,7 +39,7 @@ const Modal = ({ abrirModal, setAbrirModal }) => {
               <P>{usuario.name}</P>
               <P correo>{usuario.email}</P>
             </div>
-            <BsPersonCircle size={40} />
+            <BsPersonCircle size={"5.5vmin"} style={{ margin: "15px" }} />
           </ContenedorFicha>
           <Boton
             onClick={() => {
@@ -52,13 +53,18 @@ const Modal = ({ abrirModal, setAbrirModal }) => {
         </div>
         <hr style={{ margin: "0 30px" }}></hr>
         <Contenedor inicioSesion>
-          <a href="https://github.com/root3920" target="_blank">
+          <a
+            href="https://github.com/root3920"
+            target="_blank"
+            rel="noreferrer"
+          >
             <BsGithub color="black" size={20} style={{ cursor: "pointer" }} />
           </a>
 
           <a
             href="https://www.linkedin.com/in/federico-alarc%C3%B3n-3672a3200/"
             target="_blank"
+            rel="noreferrer"
           >
             <BsLinkedin color="black" size={20} style={{ cursor: "pointer" }} />
           </a>
@@ -72,6 +78,7 @@ const Modal = ({ abrirModal, setAbrirModal }) => {
       </Box>
     </ContenedorModal>
   ) : (
+    //Modal cuando el Usuario esta deslogueado
     <ContenedorModal className="animate__animated animate__fadeIn">
       <Box>
         <div style={{ padding: "0 30px" }}>
@@ -122,19 +129,25 @@ const Modal = ({ abrirModal, setAbrirModal }) => {
         </div>
         <hr style={{ margin: "0 30px" }}></hr>
         <Contenedor inicioSesion>
-          <a href="https://github.com/root3920" target="_blank">
+          <a
+            href="https://github.com/root3920"
+            target="_blank"
+            rel="noreferrer"
+          >
             <BsGithub color="black" size={20} style={{ cursor: "pointer" }} />
           </a>
 
           <a
             href="https://www.linkedin.com/in/federico-alarc%C3%B3n-3672a3200/"
             target="_blank"
+            rel="noreferrer"
           >
             <BsLinkedin color="black" size={20} style={{ cursor: "pointer" }} />
           </a>
           <Enlace
             href="https://drive.google.com/file/d/1VLD6BqjJsLwfqp4_yYAFmHgYMsPbTRbS/view?usp=share_link"
             target="_blank"
+            rel="noreferrer"
           >
             <H3 color={true}>CV</H3>
           </Enlace>
@@ -155,7 +168,7 @@ const ContenedorModal = styled.div`
 `;
 
 const Box = styled.div`
-  min-width: 35%;
+  min-width: 25%;
   max-height: 60%;
   display: flex;
   flex-direction: column;
@@ -212,7 +225,6 @@ const ContenedorFicha = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
   padding-bottom: 70px;
 `;
 

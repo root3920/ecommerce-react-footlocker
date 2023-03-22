@@ -17,7 +17,7 @@ const Carrito = ({ setAbrirModal }) => {
       <div className={compra.length > 0 ? "contenedor-items" : "carrito-vacio"}>
         {compra.length > 0 ? (
           compra.map((item) => {
-            if (item)
+            if (item) {
               return (
                 <Item
                   title={item.title}
@@ -28,6 +28,9 @@ const Carrito = ({ setAbrirModal }) => {
                   key={item.id}
                 />
               );
+            } else {
+              return "";
+            }
           })
         ) : (
           <div
@@ -111,7 +114,7 @@ overflow-y: hidden;
 ${(props) =>
   props.inicioSesion &&
   css`
-  overflow-y: auto;
+    overflow-y: auto;
   `}
 
 `;
@@ -173,7 +176,7 @@ const Boton = styled.button`
       height: 45px;
       font-weight: 500;
       border-radius: 5px;
-      font-size: 2.8vmin;
+      font-size: 3.4vmin;
     `}
 `;
 
