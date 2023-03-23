@@ -22,6 +22,7 @@ const Provedor = ({ children }) => {
   const [numItems, setNumItems] = useState(0);
   const [login, setLogin] = useState(false);
   const [usuario, setUsuario] = useState({});
+  const [mensaje, setMensaje] = useState("");
 
   //LLamado a la APi de los productos
   useEffect(() => {
@@ -141,7 +142,9 @@ const Provedor = ({ children }) => {
         login,
         setLogin,
         usuario,
-        setUsuario
+        setUsuario,
+        mensaje,
+        setMensaje
       }}
     >
       {children}

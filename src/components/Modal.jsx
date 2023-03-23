@@ -10,7 +10,6 @@ import { NavLink } from "react-router-dom";
 import { ContextoProducto } from "../context/contextoProductos";
 import { BsPersonCircle } from "react-icons/bs";
 
-//Falta cambiar el modal cuando se inicia sesion o se registra el usuario
 const Modal = ({ abrirModal, setAbrirModal }) => {
   const { login, usuario, setLogin } = useContext(ContextoProducto);
   console.log(usuario);
@@ -36,7 +35,7 @@ const Modal = ({ abrirModal, setAbrirModal }) => {
 
           <ContenedorFicha>
             <div>
-              <P>{usuario.name}</P>
+              <P>{usuario.fullName}</P>
               <P correo>{usuario.email}</P>
             </div>
             <BsPersonCircle size={"5.5vmin"} style={{ margin: "15px" }} />

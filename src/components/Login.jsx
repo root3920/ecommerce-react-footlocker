@@ -9,10 +9,11 @@ import { useNavigate } from "react-router-dom";
 import notie from "notie";
 
 const Login = () => {
-  const { setUsuario, setLogin, usuario } = useContext(ContextoProducto);
+  const { setUsuario, setLogin, mensaje, setMensaje } =
+    useContext(ContextoProducto);
   const [listaUsuarios, setListaUsuarios] = useState([]);
-  const [correoIngresado, setCorreoIngresado] = useState([]);
-  const [passwordIngresado, setPasswordIngresado] = useState([]);
+  const [correoIngresado, setCorreoIngresado] = useState("");
+  const [passwordIngresado, setPasswordIngresado] = useState("");
 
   const navigate = useNavigate();
 
@@ -43,7 +44,6 @@ const Login = () => {
     //Seteamos el login
     if (Usuario[0]) {
       setUsuario(Usuario[0]);
-      console.log(usuario);
       notie.alert({
         type: 1,
         text: `🎉Bienvenido de vuelta, ${Usuario[0].name}🎉`,
@@ -51,13 +51,12 @@ const Login = () => {
         position: "bottom",
       });
       setLogin(true);
+      setMensaje("");
       navigate("/");
     } else {
-      console.log("Usuario Incorrecto");
+      setMensaje("Usuario Incorrecto");
     }
   };
-
-
 
   return (
     <Contenedor>
@@ -96,11 +95,14 @@ const Login = () => {
               id="password"
               placeholder="Ingrese su contraseña"
               value={passwordIngresado}
-              onChange={(e) => setPasswordIngresado(e.target.value)}
+              onChange={(e) => {
+                setPasswordIngresado(e.target.value);
+                setMensaje("");
+              }}
               required
             />
           </Div>
-
+          <p style={{ color: "red" }}>{mensaje ? `❌${mensaje}` : ""}</p>
           <Boton>Iniciar Sesion</Boton>
         </Form>
       </Banner>

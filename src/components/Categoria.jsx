@@ -11,7 +11,6 @@ const Categoria = ({ link, category }) => {
 
   const actualizarRango = (e) => setMaxRange(e.target.value);
 
-
   return (
     <div style={{ display: "flex" }}>
       <aside style={{ width: "30%", padding: "50px" }}>

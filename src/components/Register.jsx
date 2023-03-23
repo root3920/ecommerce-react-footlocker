@@ -25,7 +25,8 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   //Conectarse al contexto
-  const { setLogin, setUsuario } = useContext(ContextoProducto);
+  const { setLogin, setUsuario, mensaje, setMensaje } =
+    useContext(ContextoProducto);
   const navigate = useNavigate();
 
   //Funcion que se ejecuta despues de enviar formulario
@@ -36,37 +37,48 @@ const Register = () => {
         password === confirmPassword &&
         (password !== "" || confirmPassword !== "")
       ) {
-        //Se crea un Objeto Usuario
-        const Usuario = {
-          name: nombre,
-          lastName: apellido,
-          fullName: `${nombre} ${apellido}`,
-          email: email,
-          password: password,
-        };
-        // Add a new document with a generated id.
-        const docRef = await addDoc(collection(db, "usuarios"), {
-          name: Usuario.fullName,
-          email: Usuario.email,
-          password: Usuario.password,
-        });
-        console.log("Document written with ID: ", docRef.id);
-        notie.alert({
-          type: 1,
-          text: "¡Registrado Correctamente!",
-          time: 2,
-          position: "bottom",
-        });
-        setNombre("");
-        setApellido("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-        setUsuario({ ...Usuario, id: docRef.id });
-        setLogin(true);
-        navigate("/");
+        if (password.length > 6 && password.match(/[A-Z]/)) {
+          //Se crea un Objeto Usuario
+          const Usuario = {
+            name: nombre,
+            lastName: apellido,
+            fullName: `${nombre} ${apellido}`,
+            email: email,
+            password: password,
+          };
+          // Add a new document with a generated id.
+          const docRef = await addDoc(collection(db, "usuarios"), {
+            name: Usuario.name,
+            lastName: Usuario.lastName,
+            fullName: `${Usuario.name} ${Usuario.lastName}`,
+            email: Usuario.email,
+            password: Usuario.password,
+          });
+          console.log("Document written with ID: ", docRef.id);
+
+          //Alerta de ingreso exitoso
+          notie.alert({
+            type: 1,
+            text: "¡Registrado Correctamente!",
+            time: 2,
+            position: "bottom",
+          });
+
+          setNombre("");
+          setMensaje("");
+          setApellido("");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+          setUsuario({ ...Usuario, id: docRef.id });
+          setLogin(true);
+          navigate("/");
+        } else {
+          setMensaje(`Las contraseñas debe tener mas de 6 caracteres
+                      y por lo menos un caracter en mayuscula`);
+        }
       } else {
-        console.log("Las contraseñas no son iguales");
+        setMensaje("Las contraseñas no son iguales");
         setPassword("");
         setConfirmPassword("");
       }
@@ -135,7 +147,10 @@ const Register = () => {
               id="password"
               value={password}
               placeholder="Ingrese su contraseña"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value)
+                setMensaje("")
+              }}
               required
             />
           </Div>
@@ -147,11 +162,14 @@ const Register = () => {
               id="confirm-password"
               value={confirmPassword}
               placeholder="Confirme su contraseña"
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value)
+                setMensaje("")
+              }}
               required
             />
           </Div>
-
+          <p style={{ color: "red" }}>{mensaje ? `❌${mensaje}` : ""}</p>
           <Boton inicioSesion>Registrarse</Boton>
         </Form>
       </Banner>
