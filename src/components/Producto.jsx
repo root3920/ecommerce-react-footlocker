@@ -120,7 +120,7 @@ const Title = styled.p`
 `;
 
 const Price = styled.p`
-  font-size: 5vmin;
+  font-size: 18px;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
   color: #1c1a45;
