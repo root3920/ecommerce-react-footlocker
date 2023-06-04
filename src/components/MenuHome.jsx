@@ -47,7 +47,7 @@ const H1 = styled.h1`
   text-align: center;
   color: black;
   overflow: hidden;
-  font-size: 4.5vmin;
+  font-size: 3.5vmin;
   margin-top: 10px;
 }
 
