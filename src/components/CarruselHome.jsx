@@ -31,7 +31,7 @@ const CarruselHome = () => {
 
 const Imagen = styled.img`
   width: 100%;
-  max-height: 400%;
+  max-height: 400px;
 `;
 
 export default CarruselHome;
